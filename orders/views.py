@@ -1,8 +1,25 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client, Order
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 # Create your views here.
+def dashboard(request):
+    total_clients = Client.objects.count()
+    total_orders = Order.objects.count()
+    pending_orders = Order.objects.filter(status="Pending").count()
+    completed_orders = Order.objects.filter(status="Completed").count()
+    recent_orders = Order.objects.select_related('client').order_by('-created_at')[:5]
+
+    context = {
+        'total_clients': total_clients,
+        'total_orders': total_orders,
+        'pending_orders': pending_orders,
+        'completed_orders': completed_orders,
+        'recent_orders': recent_orders,
+    }
+    return render(request, 'dashboard/dashboard.html', context)
+
 # CLIENT VIEWS
 def client_list(request):
     clients = Client.objects.all().order_by('-created_at')
