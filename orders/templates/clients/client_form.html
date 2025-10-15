@@ -1,35 +1,24 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">{% if client %}Edit{% else %}Add{% endif %} Client</h1>
+<h1>{% if client %}Edit Client{% else %}Add Client{% endif %}</h1>
 
-    <form method="POST" class="card p-4 shadow-sm">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" name="name" value="{{ client.name }}" class="form-control" required>
-        </div>
+<form method="POST">
+    {% csrf_token %}
+    <label>Name</label>
+    <input type="text" name="name" value="{{ client.name }}" required>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" value="{{ client.email }}" class="form-control" required>
-        </div>
+    <label>Email</label>
+    <input type="email" name="email" value="{{ client.email }}" required>
 
-        <div class="mb-3">
-            <label for="phone" class="form-label">Phone</label>
-            <input type="text" id="phone" name="phone" value="{{ client.phone }}" class="form-control">
-        </div>
+    <label>Phone</label>
+    <input type="text" name="phone" value="{{ client.phone }}">
 
-        <div class="mb-3">
-            <label for="company" class="form-label">Company</label>
-            <input type="text" id="company" name="company" value="{{ client.company }}" class="form-control">
-        </div>
+    <label>Company</label>
+    <input type="text" name="company" value="{{ client.company }}">
 
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-success">Save</button>
-            <a href="{% url 'client_list' %}" class="btn btn-secondary">Cancel</a>
-        </div>
-    </form>
-</div>
+    <div class="action-buttons">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'client_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
 {% endblock %}
