@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
 # Create your views here.
+@login_required
 def dashboard(request):
     total_clients = Client.objects.count()
     total_orders = Order.objects.count()
