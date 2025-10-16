@@ -1,3 +1,5 @@
+import csv
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client, Order
 from django.contrib.auth.decorators import login_required
@@ -96,3 +98,42 @@ def order_delete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.delete()
     return redirect('order_list')
+
+def export_clients_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="clients.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['ID', 'Name', 'Email', 'Phone', 'Company', 'Created At'])
+
+    for client in Client.objects.all():
+        writer.writerow([
+            client.id,
+            client.name,
+            client.email,
+            client.phone,
+            client.company,
+            client.created_at.strftime('%Y-%m-%d %H:%M'),
+        ])
+
+    return response
+
+def export_orders_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="orders.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['ID', 'Client', 'Title', 'Status', 'Amount', 'Created By', 'Created At'])
+
+    for order in Order.objects.all():
+        writer.writerow([
+            order.id,
+            order.client.name,
+            order.title,
+            order.status,
+            order.amount,
+            order.created_by.username if order.created_by else '',
+            order.created_at.strftime('%Y-%m-%d %H:%M'),
+        ])
+
+    return response

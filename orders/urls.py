@@ -13,4 +13,7 @@ urlpatterns = [
     path('orders/add/', views.order_create, name='order_add'),
     path('orders/<int:pk>/edit/', views.order_update, name='order_edit'),
     path('orders/<int:pk>/delete/', views.order_delete, name='order_delete'),
+
+    path('clients/export/', views.export_clients_csv, name='export_clients_csv'),
+    path('orders/export/', views.export_orders_csv, name='export_orders_csv'),
 ]
