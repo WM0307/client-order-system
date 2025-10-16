@@ -1,0 +1,63 @@
+[
+    {
+        "model": "orders.client",
+        "pk": 1,
+        "fields": {
+            "name": "Alice Tan",
+            "email": "alice@example.com",
+            "phone": "0123456789",
+            "company": "Alpha Solutions",
+            "created_at": "2025-10-01T08:00:00Z"
+        }
+    },
+    {
+        "model": "orders.client",
+        "pk": 2,
+        "fields": {
+            "name": "Bob Lee",
+            "email": "bob@example.com",
+            "phone": "0123123123",
+            "company": "Beta Tech",
+            "created_at": "2025-10-02T09:00:00Z"
+        }
+    },
+    {
+        "model": "orders.order",
+        "pk": 1,
+        "fields": {
+            "client": 1,
+            "title": "Website Design",
+            "description": "Corporate website for Alpha Solutions",
+            "status": "Pending",
+            "amount": "5000.00",
+            "created_at": "2025-10-01T10:00:00Z",
+            "created_by": 1
+        }
+    },
+    {
+        "model": "orders.order",
+        "pk": 2,
+        "fields": {
+            "client": 2,
+            "title": "Mobile App Development",
+            "description": "Developing cross-platform mobile app",
+            "status": "In Progress",
+            "amount": "12000.00",
+            "created_at": "2025-10-05T12:00:00Z",
+            "created_by": 1
+        }
+    },
+    {
+        "model": "orders.order",
+        "pk": 3,
+        "fields": {
+            "client": 1,
+            "title": "SEO Optimization",
+            "description": "Monthly SEO service package",
+            "status": "Completed",
+            "amount": "1500.00",
+            "created_at": "2025-10-10T15:00:00Z",
+            "created_by": 1
+        }
+    }
+]
