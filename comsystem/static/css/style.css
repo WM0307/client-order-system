@@ -1,6 +1,7 @@
 /* === General Layout === */
 body {
   margin: 0;
+  padding-top: 80px;
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: #f5f6fa;
   color: #333;
@@ -22,7 +23,7 @@ main.main-container {
   padding: 14px 30px;
   display: flex;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
 
@@ -66,7 +67,8 @@ main.main-container {
 }
 
 /* === Buttons === */
-button, .btn {
+button,
+.btn {
   background-color: #007bff;
   border: none;
   color: white;
@@ -78,7 +80,8 @@ button, .btn {
   display: inline-block;
 }
 
-button:hover, .btn:hover {
+button:hover,
+.btn:hover {
   background-color: #0056b3;
 }
 
@@ -121,10 +124,11 @@ table {
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
@@ -169,7 +173,7 @@ form {
   background: #fff;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 20px auto;
 }
@@ -180,7 +184,9 @@ label {
   margin-bottom: 5px;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   padding: 8px;
   margin-bottom: 15px;
@@ -190,7 +196,8 @@ input, select, textarea {
 }
 
 /* Ensure consistent button sizing on forms */
-form button, form .btn {
+form button,
+form .btn {
   width: auto;
   min-width: 100px;
 }
@@ -213,7 +220,7 @@ form .btn-secondary {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
