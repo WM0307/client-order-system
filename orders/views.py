@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client, Order
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.core.paginator import Paginator
 
 # Create your views here.
 @login_required
@@ -11,6 +11,7 @@ def dashboard(request):
     total_clients = Client.objects.count()
     total_orders = Order.objects.count()
     pending_orders = Order.objects.filter(status="Pending").count()
+    inprogress_orders = Order.objects.filter(status="In Progress").count()  # 👈 new
     completed_orders = Order.objects.filter(status="Completed").count()
     recent_orders = Order.objects.select_related('client').order_by('-created_at')[:5]
 
@@ -18,6 +19,7 @@ def dashboard(request):
         'total_clients': total_clients,
         'total_orders': total_orders,
         'pending_orders': pending_orders,
+        'inprogress_orders': inprogress_orders,  # 👈 new
         'completed_orders': completed_orders,
         'recent_orders': recent_orders,
     }
@@ -25,8 +27,17 @@ def dashboard(request):
 
 # CLIENT VIEWS
 def client_list(request):
-    clients = Client.objects.all().order_by('-created_at')
-    return render(request, 'clients/client_list.html', {'clients': clients})
+    clients = Client.objects.all().order_by('id')
+
+    # Pagination — show 10 clients per page
+    paginator = Paginator(clients, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+    }
+    return render(request, 'clients/client_list.html', context)
 
 def client_create(request):
     if request.method == 'POST':
@@ -57,7 +68,15 @@ def client_delete(request, pk):
 # ORDER VIEWS
 def order_list(request):
     orders = Order.objects.select_related('client').order_by('-created_at')
-    return render(request, 'orders/order_list.html', {'orders': orders})
+
+    paginator = Paginator(orders, 10)  # show 10 per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+    }
+    return render(request, 'orders/order_list.html', context)
 
 def order_create(request):
     clients = Client.objects.all()
