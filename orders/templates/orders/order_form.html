@@ -8,6 +8,7 @@
         <div class="mb-3">
             <label class="form-label">Client</label>
             <select name="client" class="form-select" required>
+                <option value="" disabled {% if not order %}selected{% endif %}>-- Choose a client --</option>
                 {% for client in clients %}
                     <option value="{{ client.id }}" {% if order and order.client.id == client.id %}selected{% endif %}>{{ client.name }}</option>
                     client.name }}</option>
@@ -35,6 +36,7 @@
         <div class="mb-3">
             <label class="form-label">Status</label>
             <select name="status" class="form-select" required>
+                <option value="" disabled {% if not order %}selected{% endif %}>-- Choose a status --</option>
                 {% for s in statuses %}
                     <option value="{{ s }}" {% if order and order.status == s %}selected{% endif %}>{{ s }}</option>
                 {% endfor %}

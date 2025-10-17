@@ -11,7 +11,7 @@ def dashboard(request):
     total_clients = Client.objects.count()
     total_orders = Order.objects.count()
     pending_orders = Order.objects.filter(status="Pending").count()
-    inprogress_orders = Order.objects.filter(status="In Progress").count()  # 👈 new
+    inprogress_orders = Order.objects.filter(status="In Progress").count()  
     completed_orders = Order.objects.filter(status="Completed").count()
     recent_orders = Order.objects.select_related('client').order_by('-created_at')[:5]
 
@@ -19,7 +19,7 @@ def dashboard(request):
         'total_clients': total_clients,
         'total_orders': total_orders,
         'pending_orders': pending_orders,
-        'inprogress_orders': inprogress_orders,  # 👈 new
+        'inprogress_orders': inprogress_orders,  
         'completed_orders': completed_orders,
         'recent_orders': recent_orders,
     }
@@ -80,7 +80,7 @@ def order_list(request):
 
 def order_create(request):
     clients = Client.objects.all()
-    statuses = ["Pending", "In Progress", "Completed"]  # 👈 Add this
+    statuses = ["Pending", "In Progress", "Completed"]  
     if request.method == 'POST':
         client_id = request.POST.get('client')
         title = request.POST.get('title')
@@ -102,7 +102,7 @@ def order_create(request):
 def order_update(request, pk):
     order = get_object_or_404(Order, pk=pk)
     clients = Client.objects.all()
-    statuses = ["Pending", "In Progress", "Completed"]  # 👈 Add this
+    statuses = ["Pending", "In Progress", "Completed"]  
     if request.method == 'POST':
         order.client_id = request.POST.get('client')
         order.title = request.POST.get('title')
