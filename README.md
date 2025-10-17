@@ -95,6 +95,7 @@ python manage.py test
 ```
 
 Tests cover:
+- User authentication
 - Creating clients and orders
 - Loading list views
 - CSV export functionality
